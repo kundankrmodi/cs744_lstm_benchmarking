@@ -105,8 +105,8 @@ elif FLAGS.job_name == "worker":
     # Define loss and optimizer
     loss_op = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
         logits=logits, labels=Y))
-    optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
-    train_op = optimizer.minimize(loss_op)
+ 
+    train_op = tf.train.AdamOptimizer(learning_rate).minimize(loss_op)
 
     # Evaluate model (with test logits, for dropout to be disabled)
     correct_pred = tf.equal(tf.argmax(prediction, 1), tf.argmax(Y, 1))
